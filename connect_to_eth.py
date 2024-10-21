@@ -15,10 +15,6 @@ def connect_to_eth():
 	w3 = Web3(HTTPProvider(url))
 	assert w3.is_connected(), f"Failed to connect to provider at {url}"
 
-	# Verify connection by fetching the latest block
-  latest_block = w3.eth.get_block('latest')
-  print(f"Latest Ethereum Block: {latest_block['number']}")
-
 	return w3
 
 
@@ -42,10 +38,6 @@ def connect_with_middleware(contract_json):
 	w3.middleware_onion.inject(geth_poa_middleware, layer=0)
   # Check the connection
 	assert w3.is_connected(), f"Failed to connect to provider at {url}"
-
-  # Verify connection by fetching the latest block
-  latest_block = w3.eth.get_block('latest')
-  print(f"Latest BSC Testnet Block: {latest_block['number']}")
 
 	# Create the contract object
 	contract = w3.eth.contract(address=Web3.to_checksum_address(address), abi=abi)
